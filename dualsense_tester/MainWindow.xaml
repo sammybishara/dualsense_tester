@@ -12,6 +12,6 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Image Source="{StaticResource dualsense_picDrawingImage}"
-            Grid.Column = "1"
+            Grid.Column = "1"></Image>
     </Grid>
 </Window>
