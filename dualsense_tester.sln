@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dualsense_tester", "dualsense_tester\dualsense_tester.csproj", "{F83E0BF4-F57B-48D2-8E84-930F0BD2DC8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F83E0BF4-F57B-48D2-8E84-930F0BD2DC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83E0BF4-F57B-48D2-8E84-930F0BD2DC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83E0BF4-F57B-48D2-8E84-930F0BD2DC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83E0BF4-F57B-48D2-8E84-930F0BD2DC8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74F04FE6-017A-4192-B13B-9F6DEE8EAD5C}
+	EndGlobalSection
+EndGlobal
