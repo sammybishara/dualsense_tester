@@ -9,6 +9,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using HidLibrary;
+using System;
+using System.Linq;
+using HidSharp;
+using System.Windows.Media.Animation;
+
 namespace dualsense_tester
 {
     /// <summary>
@@ -19,6 +25,21 @@ namespace dualsense_tester
         public MainWindow()
         {
             InitializeComponent();
+            startListening();
         }
+
+        private void startListening()
+        {
+            var deviceList = DeviceList.Local;
+            var devices = deviceList.GetAllDevices();
+            foreach (var device in devices)
+            {
+                if (device.GetFriendlyName() == "DualSense Wireless Controller")
+                {
+                    DualSenseTester ds_tester = new DualSenseTester();
+                }
+            }
+        }
+
     }
 }
