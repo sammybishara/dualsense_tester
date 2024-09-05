@@ -41,191 +41,40 @@ public class DrawingImageCreator
 		// Up d pad key
 		//
 		// outline for d pad key
-		GeometryDrawing upOutlineGD = new GeometryDrawing
-		{
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.444C864.909,572.731 867.306,578.78 871.612,583.36 878.468,590.653 888.943,601.795 894.962,608.198 896.181,609.494 897.88,610.229 899.658,610.229 901.437,610.229 903.136,609.494 904.355,608.198 910.374,601.795 920.849,590.653 927.705,583.36 932.011,578.78 934.408,572.731 934.408,566.444 934.408,559.679 934.408,550.432 934.408,542.109z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-		DrawingGroup upDG = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(1.04799, 0, 0, 1.02376, -59.2527, -26.3824)
-		};
-		upDG.Children.Add(upOutlineGD);
-
-		// Up d pad icon 
-		GeometryDrawing upIconGD = new GeometryDrawing
-		{
-			Brush = Brushes.Black,
-			Geometry = Geometry.Parse("F0 M1117, 892z M0, 0z M889.258, 543.129L907.916, 543.129 898.835, 534.049 889.258, 543.129z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-
-		// up d pad outline 
-		DrawingGroup upButton = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(
-				new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -26.3824)
-			)
-		};
-		upButton.Children.Add(upOutlineGD);
-		upButton.Children.Add(upIconGD);
-
+		DrawingGroup upButton = CreateDPadButton("F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.444C864.909,572.731 867.306,578.78 871.612,583.36 878.468,590.653 888.943,601.795 894.962,608.198 896.181,609.494 897.88,610.229 899.658,610.229 901.437,610.229 903.136,609.494 904.355,608.198 910.374,601.795 920.849,590.653 927.705,583.36 932.011,578.78 934.408,572.731 934.408,566.444 934.408,559.679 934.408,550.432 934.408,542.109z",
+												"F0 M1117, 892z M0, 0z M889.258, 543.129L907.916, 543.129 898.835, 534.049 889.258, 543.129z",
+												new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -26.3824),
+												new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -26.3824)
+												);
 		//
 		// Down D pad Button 
 		//
-
-		GeometryDrawing downOutlineGD = new GeometryDrawing
-		{
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.234C864.909,572.646 867.402,578.806 871.862,583.412 878.746,590.522 889.092,601.208 895.028,607.339 896.242,608.593 897.913,609.301 899.658,609.301 901.404,609.301 903.075,608.593 904.289,607.339 910.225,601.208 920.571,590.522 927.455,583.412 931.914,578.806 934.408,572.646 934.408,566.234 934.408,559.488 934.408,550.346 934.408,542.109z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-		DrawingGroup downOutline = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(new Matrix(1, 0, 0, 1, 0, 3))
-
-		};
-		downOutline.Children.Add(downOutlineGD);
-
-		GeometryDrawing downButtonIcon = new GeometryDrawing
-		{
-			Brush = Brushes.Black,
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-		DrawingGroup downButton = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(new Matrix(1.04799, 0, 0, -1.02376, -59.2527, 1264.91))
-
-		};
-		downButton.Children.Add(downButtonIcon);
-		downButton.Children.Add(downOutline);
+		DrawingGroup downButton = CreateDPadButton("F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.234C864.909,572.646 867.402,578.806 871.862,583.412 878.746,590.522 889.092,601.208 895.028,607.339 896.242,608.593 897.913,609.301 899.658,609.301 901.404,609.301 903.075,608.593 904.289,607.339 910.225,601.208 920.571,590.522 927.455,583.412 931.914,578.806 934.408,572.646 934.408,566.234 934.408,559.488 934.408,550.346 934.408,542.109z",
+													"F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z",
+													new Matrix(1, 0, 0, 1, 0, 3),
+													new Matrix(1.04799, 0, 0, -1.02376, -59.2527, 1264.91)
+													);
 
 		//
 		// Right D pad Key
 		//
 
 		// Right D pad key outline
-		GeometryDrawing rightOutlineGD = new GeometryDrawing
-		{
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.458C864.909,572.736 867.3,578.778 871.596,583.357 878.24,590.438 888.25,601.106 894.029,607.265 895.224,608.538 896.884,609.272 898.63,609.299 900.376,609.326 902.058,608.643 903.292,607.407 909.386,601.302 920.069,590.597 927.192,583.461 931.813,578.831 934.408,572.556 934.408,566.015 934.408,559.291 934.408,550.257 934.408,542.109z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-		DrawingGroup rightOutline = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(new Matrix(1, 0, 0, 1, 0, 3))
-		};
-		rightOutline.Children.Add(rightOutlineGD);
-
-		// Right D pad Icon
-		GeometryDrawing rightIcon = new GeometryDrawing
-		{
-			Brush = Brushes.Black,
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-
-		DrawingGroup rightButton = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(new Matrix(6.41709E-17, -1.02376, -1.04799, -6.26875E-17, 1543.94, 1539.75))
-		};
-		rightButton.Children.Add(rightOutline);
-		rightButton.Children.Add(rightIcon);
+		DrawingGroup rightButton = CreateDPadButton("F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.458C864.909,572.736 867.3,578.778 871.596,583.357 878.24,590.438 888.25,601.106 894.029,607.265 895.224,608.538 896.884,609.272 898.63,609.299 900.376,609.326 902.058,608.643 903.292,607.407 909.386,601.302 920.069,590.597 927.192,583.461 931.813,578.831 934.408,572.556 934.408,566.015 934.408,559.291 934.408,550.257 934.408,542.109z",
+														"F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z",
+														new Matrix(1, 0, 0, 1, 0, 3),
+														new Matrix(6.41709E-17, -1.02376, -1.04799, -6.26875E-17, 1543.94, 1539.75)
+														);
 
 		//
 		// Left D Pad Key
 		// 
-
-		// Left Button outlines
-		GeometryDrawing leftButtonOutlineGD = new GeometryDrawing
-		{
-			Geometry = Geometry.Parse("F0 M1117, 892z M0, 0z M934.408, 542.109C934.408, 530.894, 925.317, 521.803, 914.103, 521.803L885.214, 521.803C874, 521.803, 864.909, 530.894, 864.909, 542.109L864.909, 566.458C864.909, 572.736 867.3, 578.778 871.596, 583.357 878.24, 590.438 888.25, 601.106 894.029, 607.265 895.224, 608.538 896.884, 609.272 898.63, 609.299 900.376, 609.326 902.058, 608.643 903.292, 607.407 909.386, 601.302 920.069, 590.597 927.192, 583.461 931.813, 578.831 934.408, 572.556 934.408, 566.015 934.408, 559.291 934.408, 550.257 934.408, 542.109"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-		DrawingGroup leftButtonOutline = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(new Matrix(1, 0, 0, 1, 0, 3))
-		};
-		leftButtonOutline.Children.Add(leftButtonOutlineGD);
-
-		// Left Button Icon
-		GeometryDrawing leftButtonIcon = new GeometryDrawing
-		{
-			Brush = Brushes.Black,
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-
-		DrawingGroup leftButton = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(new Matrix(-6.41709E-17, -1.02376, 1.04799, -6.26875E-17, 223.22, 1539.75))
-		};
-		leftButton.Children.Add(leftButtonIcon);
-		leftButton.Children.Add(leftButtonOutline);
-
+		DrawingGroup leftButton = CreateDPadButton("F0 M1117, 892z M0, 0z M934.408, 542.109C934.408, 530.894, 925.317, 521.803, 914.103, 521.803L885.214, 521.803C874, 521.803, 864.909, 530.894, 864.909, 542.109L864.909, 566.458C864.909, 572.736 867.3, 578.778 871.596, 583.357 878.24, 590.438 888.25, 601.106 894.029, 607.265 895.224, 608.538 896.884, 609.272 898.63, 609.299 900.376, 609.326 902.058, 608.643 903.292, 607.407 909.386, 601.302 920.069, 590.597 927.192, 583.461 931.813, 578.831 934.408, 572.556 934.408, 566.015 934.408, 559.291 934.408, 550.257 934.408, 542.109",
+													"F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z",
+													new Matrix(1, 0, 0, 1, 0, 3),
+													new Matrix(-6.41709E-17, -1.02376, 1.04799, -6.26875E-17, 223.22, 1539.75)
+													);
+ 
 		// Final
 		DrawingGroup drawing_2 = new DrawingGroup();
 		drawing_2.Opacity = 1.0;
@@ -403,7 +252,7 @@ public class DrawingImageCreator
 
 	}
 
-	private DrawingGroup CreateTriggerButton(double penThickness, string geometry, Matrix transform )
+	private DrawingGroup CreateTriggerButton(double penThickness, string geometry, Matrix transform)
 	{
 		GeometryDrawing triggerGD = new GeometryDrawing
 		{
@@ -426,4 +275,52 @@ public class DrawingImageCreator
 		triggerButton.Children.Add(triggerGD);
 		return triggerButton;
 	}
+
+	private DrawingGroup CreateDPadButton(string outlineGeometry, string iconGeometry, Matrix outlineTransform, Matrix buttonTransform)
+	{
+        // outline for d pad key
+        GeometryDrawing	outlineGD = new GeometryDrawing
+        {
+            Geometry = Geometry.Parse(outlineGeometry),
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 4,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            }
+        };
+        DrawingGroup DG = new DrawingGroup
+        {
+            Opacity = 1.0,
+            Transform = new MatrixTransform(outlineTransform)
+        };
+        DG.Children.Add(outlineGD);
+
+        // Up d pad icon 
+        GeometryDrawing iconGD = new GeometryDrawing
+        {
+            Brush = Brushes.Black,
+            Geometry = Geometry.Parse(iconGeometry),
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 4,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            }
+        };
+
+        // up d pad outline 
+        DrawingGroup button = new DrawingGroup
+        {
+            Opacity = 1.0,
+            Transform = new MatrixTransform(buttonTransform)
+        };
+        button.Children.Add(outlineGD);
+        button.Children.Add(iconGD);
+		return button;
+    }
 }
