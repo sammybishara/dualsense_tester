@@ -7,84 +7,26 @@ public class DrawingImageCreator
 	public DrawingImage CreateDualSenseDrawingImage()
 	{
 
-		// X icon
-		DrawingGroup xIcon = DrawXButton();
+		// X icon and outline
+		var xButton = DrawXButton();
+		DrawingGroup xIcon = xButton.Item1;
+		DrawingGroup xButtonOutline = xButton.Item2;
 
-		//// Square Icon
-		GeometryDrawing squareIconGD = new GeometryDrawing
-		{
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4.54,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round,
-			},
+		//// Square Icon and outline
+		var squareButton = CreateSquareButton();
+		DrawingGroup squareIcon = squareButton.Item1;
+		DrawingGroup squareButtonOutline = squareButton.Item2;
 
-			Geometry = new RectangleGeometry(
-				new Rect(1634.48, 533.609, 37.307, 37.307),
-				0,
-				0
-			)
-		};
-		DrawingGroup squareIcon = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(0.923202, 0, 0, 0.90186, 75.2895, 121.747)
 
-		};
-		squareIcon.Children.Add(squareIconGD);
+		//// Triangle Icon and outline
+		var trianglebutton = CreateTriangleButton();
+		DrawingGroup triangleIcon = trianglebutton.Item1;
+		DrawingGroup triangleButtonOutline = trianglebutton.Item2;
 
-		//// Triangle Icon
-		GeometryDrawing triangleIconGD = new GeometryDrawing
-		{
-			Geometry = Geometry.Parse("F0 M1117,892z M0,0z M1668.06,540.081L1689.09,574.313 1647.02,574.313 1668.06,540.081z"),
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4.13,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			}
-		};
-		DrawingGroup triangleIcon = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(
-				new Matrix(1.00662, 0, 0, 0.997527, -3.92375, -7.67218)
-			)
-		};
-		triangleIcon.Children.Add(triangleIconGD);
-
-		//// Circle Button Icon
-		GeometryDrawing circleIconGD = new GeometryDrawing
-		{
-			Pen = new Pen
-			{
-				Brush = Brushes.Black,
-				Thickness = 4,
-				StartLineCap = PenLineCap.Round,
-				EndLineCap = PenLineCap.Round,
-				LineJoin = PenLineJoin.Round
-			},
-			Geometry = new EllipseGeometry
-			{
-				RadiusX = 19.1,
-				RadiusY = 19.1,
-				Center = new Point(1729.14, 623.366)
-
-			}
-		};
-		DrawingGroup circleIcon = new DrawingGroup
-		{
-			Opacity = 1.0,
-			Transform = new MatrixTransform(
-				new Matrix(1.04799, 0, 0, 1.02376, -63.5968, -18.369)
-			)
-		};
-		circleIcon.Children.Add(circleIconGD);
+		//// Circle button icon and outline
+		var circleButton =  CreateCircleButton();
+		DrawingGroup circleIcon = circleButton.Item1;
+		DrawingGroup circleOutline = circleButton.Item2;
 
 		// R2 Button 
 		GeometryDrawing R2GD = new GeometryDrawing
@@ -109,8 +51,10 @@ public class DrawingImageCreator
 		};
 		R2Button.Children.Add(R2GD);
 
-
+		//
 		// L2 Button
+		//
+
 		GeometryDrawing L2GD = new GeometryDrawing
 		{
 			Pen = new Pen
@@ -321,9 +265,6 @@ public class DrawingImageCreator
 		leftButton.Children.Add(leftButtonIcon);
 		leftButton.Children.Add(leftButtonOutline);
 
-
-
-
 		// Final
 		DrawingGroup drawing_2 = new DrawingGroup();
         drawing_2.Opacity = 1.0;
@@ -340,14 +281,18 @@ public class DrawingImageCreator
 
 		drawing_2.Children.Add(xIcon);
 		drawing_2.Children.Add(squareIcon);
+		drawing_2.Children.Add(squareButtonOutline);
 		drawing_2.Children.Add(triangleIcon);
+		drawing_2.Children.Add(triangleButtonOutline);
 		drawing_2.Children.Add(circleIcon);
+		drawing_2.Children.Add(circleOutline);
 		drawing_2.Children.Add(R2Button);
 		drawing_2.Children.Add(L2Button);
 		drawing_2.Children.Add(upButton);
 		drawing_2.Children.Add(downButton);
 		drawing_2.Children.Add(rightButton);
 		drawing_2.Children.Add(leftButton);
+		drawing_2.Children.Add(xButtonOutline);
 
 
 		DrawingGroup drawing_1 = new DrawingGroup();
@@ -361,7 +306,7 @@ public class DrawingImageCreator
         return dualsense_pic;
     }
 
-	public DrawingGroup DrawXButton()
+	public (DrawingGroup, DrawingGroup) DrawXButton()
 	{
         // X Icon 
         GeometryDrawing xIconGD = new GeometryDrawing
@@ -391,8 +336,133 @@ public class DrawingImageCreator
             )
             )
         };
-        xIcon.Children.Add(xIconGD);
-		return xIcon;
+		xIcon.Children.Add( xIconGD );
+		// X button Outline
+		DrawingGroup xButtonOutline = CreateButtonOutline(
+															34.957,
+															34.957,
+															1665.11,
+															525.401,
+															new Matrix(1.04799, 0, 0, 1.02376, -69.8487, 153.587)
+														);
+		return (xIcon, xButtonOutline);
+    }
+
+	public (DrawingGroup, DrawingGroup) CreateSquareButton()
+	{
+		// Square Button Icon
+		DrawingGroup squareIcon = CreateButtonIcon(
+													4.54,
+													"M 1634.48,533.609 H 1671.787 V 570.916 H 1634.48 Z",
+													new Matrix(0.923202, 0, 0, 0.90186, 75.2895, 121.747)
+												   );
+
+		// Square Button Outline
+		DrawingGroup squareOutline = CreateButtonOutline(
+															34.957,
+															34.957,
+															1665.11,
+															525.401,
+															new Matrix(1.04799, 0, 0, 1.02376, -143.208, 81.9239)
+														);
+		return (squareIcon, squareOutline);
+    }
+
+	public (DrawingGroup, DrawingGroup) CreateCircleButton()
+	{
+		//// circle button icon
+		DrawingGroup circleIcon = CreateButtonIcon(
+													4,
+													"M 1748.24, 623.366 A 19.1, 19.1 0 1, 0 1710.04, 623.366 A 19.1, 19.1 0 1, 0 1748.24, 623.366",
+													new Matrix(1.04799, 0, 0, 1.02376, -63.5968, -18.369)
+												);
+
+        // Circle Button outline
+        DrawingGroup circleOutline = CreateButtonOutline(
+															34.957,
+															34.957,
+															1665.11,
+															525.401,
+															new Matrix(1.04799, 0, 0, 1.02376, 3.51071, 81.9239)
+														);
+		return (circleIcon, circleOutline);
+    }
+
+	public (DrawingGroup, DrawingGroup) CreateTriangleButton()
+	{
+		// Triangle Icon
+		DrawingGroup triangleIcon = CreateButtonIcon(
+														4.13,
+														"F0 M1117,892z M0,0z M1668.06,540.081L1689.09,574.313 1647.02,574.313 1668.06,540.081z",
+														new Matrix(1.00662, 0, 0, 0.997527, -3.92375, -7.67218)
+													);
+
+		// Triangle Button Outline
+		DrawingGroup triangleOutline = CreateButtonOutline(
+															34.957,
+															34.957,
+															1665.11,
+															525.401,
+															new Matrix(1.04799, 0, 0, 1.02376, -69.8487, 10.2604)
+															);
+
+		return (triangleIcon, triangleOutline);
+    }
+
+	private DrawingGroup CreateButtonIcon(double penThickness, string geometry, Matrix transform)
+	{
+		// Creates the button icons for each shape button
+        GeometryDrawing iconGD = new GeometryDrawing
+        {
+            Geometry = Geometry.Parse(geometry),
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = penThickness,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            }
+        };
+		DrawingGroup icon = new DrawingGroup
+		{
+			Opacity = 1.0,
+			Transform = new MatrixTransform(transform)
+		};
+		icon.Children.Add(iconGD);
+		return icon;
+    }
+
+	private DrawingGroup CreateButtonOutline(double radiusX, double radiusY, double centerX, double centerY, Matrix matrix)
+	{
+		// Creates outline for shape buttons
+        GeometryDrawing outlineGD = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 4,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = new EllipseGeometry
+            {
+                RadiusX = radiusX,
+                RadiusY = radiusY,
+                Center = new Point(centerX, centerY)
+            }
+        };
+
+        DrawingGroup outline = new DrawingGroup
+        {
+            Opacity = 1.0,
+            Transform = new MatrixTransform(matrix)
+        };
+        outline.Children.Add(outlineGD);
+		
+		return outline;
+
     }
 }
 
