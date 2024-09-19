@@ -1,6 +1,7 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Navigation;
+using System.Windows.Media.Media3D;
 
 public class DrawingImageCreator
 {
@@ -226,6 +227,244 @@ public class DrawingImageCreator
                                             4.45,
                                             1);
 
+        //
+        // Share Button Icon
+        //
+        DrawingGroup shareButtonIcon = Create3PartShape("F0 M1117,892z M0,0z M985.029,452.795L980.502,445.716 985.029,452.795z",
+                                                "F0 M1117,892z M0,0z M992.053,450.079L992.053,441.353 992.053,450.079z",
+                                                "F0 M1117,892z M0,0z M997.87,452.795L1003.06,445.716",
+                                                4,
+                                                1,
+                                                new Matrix(
+                                                            1.04799,
+                                                            0,
+                                                            0,
+                                                            1.02376,
+                                                            -60.7353,
+                                                            -17.8077));
+
+        //
+        // Options Button Icon 
+        //
+        DrawingGroup line1 = CreateShape("F0 M1117,892z M0,0z M1580.81,444.569L1566.83,444.569 1580.81,444.569z",
+                                            new Matrix(
+                                                        1,
+                                                        0,
+                                                        0,
+                                                        1,
+                                                        -3,
+                                                        -2),
+                                            4,
+                                            1);
+
+        DrawingGroup line2 = CreateShape("F0 M1117,892z M0,0z M1580.81,450.289L1566.83,450.289 1580.81,450.289z",
+                                            new Matrix(
+                                                        1,
+                                                        0,
+                                                        0,
+                                                        1,
+                                                        -3,
+                                                        -2),
+                                            4,
+                                            1);
+
+        DrawingGroup line3 = CreateShape("F0 M1117,892z M0,0z M1580.81,456.01L1566.83,456.01",
+                                            new Matrix(1,
+                                                        0,
+                                                        0,
+                                                        1,
+                                                        -3,
+                                                        -2),
+                                            4,
+                                            1);
+
+        DrawingGroup optionsButtonIcon = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(
+                           1.04799,
+                           0,
+                           0,
+                           1.02376,
+                           -59.2527,
+                           -21.0995))
+        };
+        optionsButtonIcon.Children.Add(line1);
+        optionsButtonIcon.Children.Add(line2);
+        optionsButtonIcon.Children.Add(line3);
+
+        // 
+        // Right Joystick and right joystick outline
+        //
+        GeometryDrawing rightOutlineGD = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 3.57,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round,
+            },
+            Geometry = new EllipseGeometry
+            {
+                RadiusX = 78.002,
+                RadiusY = 78.002,
+                Center = new Point(1493.18, 791.553)
+            }
+        };
+
+        DrawingGroup rightOutline = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(1.11981, 0, 0, 1.11981, -187.697, -89.8877))
+        };
+
+        rightOutline.Children.Add(rightOutlineGD);
+
+
+        GeometryDrawing rightJoystickGD = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 5.46,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = new EllipseGeometry
+            {
+                RadiusX = 78.002,
+                RadiusY = 78.002,
+                Center = new Point(1493.18, 791.553)
+            }
+        };
+
+        DrawingGroup rightJoystick = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(
+                                                        0.733227,
+                                                        0,
+                                                        0,
+                                                        0.733227,
+                                                        389.538,
+                                                        216.112))
+        };
+        rightJoystick.Children.Add(rightJoystickGD);
+
+        
+
+
+
+        DrawingGroup rightJoystickGroup = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -21.0995))
+        };
+
+        rightJoystickGroup.Children.Add(rightJoystick);
+        rightJoystickGroup.Children.Add(rightOutline);
+
+
+        //
+        // Left Joystick Outline and left joystick
+        //
+        GeometryDrawing leftOutlineGD = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 3.57,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = new EllipseGeometry
+            {
+                RadiusX = 78.002,
+                RadiusY = 78.002,
+                Center = new Point(1493.18, 791.553)
+            }
+        };
+
+        DrawingGroup leftOutline = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(
+                                                        1.11981,
+                                                        0,
+                                                        0,
+                                                        1.11981,
+                                                        -599.389,
+                                                        -89.8877))
+        };
+
+        leftOutline.Children.Add(leftOutlineGD);
+
+        GeometryDrawing leftJoystickGD = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = 5.46,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = new EllipseGeometry
+            {
+                RadiusX = 78.002,
+                RadiusY = 78.002,
+                Center = new Point(1493.18, 791.553)
+            }
+        };
+
+        DrawingGroup leftJoystick = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(
+                                                        0.733227,
+                                                        0,
+                                                        0,
+                                                        0.733227,
+                                                        -22.1542,
+                                                        216.112))
+        };
+        leftJoystick.Children.Add(leftJoystickGD);
+
+        DrawingGroup leftJoystickGroup = new DrawingGroup
+        {
+            Opacity = 1,
+            Transform = new MatrixTransform(new Matrix(
+                                                        1.04799,
+                                                        0,
+                                                        0,
+                                                        1.02376,
+                                                        -59.2527,
+                                                        -21.0995))
+        };
+
+        leftJoystickGroup.Children.Add(leftOutline);
+        leftJoystickGroup.Children.Add(leftJoystick);
+
+
+        // unknown
+        DrawingGroup unknown = CreateShape(
+                                            "F1 M1117,892z M0,0z M81.55,606.2C22.2,589.175 12.375,554.1 39.3,533.725 58.7,520.975 81,509.875 104.6,501.525L106.775,500.85 282.2,437.95 282.2,510.2 156.45,556.175C134.425,564.65 130.675,575.925 148.975,581.975 158.1,584.3 168.55,585.65 179.325,585.65 194.7,585.65 209.425,582.925 223.05,577.95L222.175,578.225 282.725,556.175 282.725,620.975C278.975,621.9 274.725,622.35 270.55,623.25 251.175,626.65 228.875,628.6 206.125,628.6 161.675,628.6 118.975,621.15 79.175,607.45L81.925,608.275 81.55,606.2z M451.225,613.6L647.925,542.525C670.25,534.475 673.725,523 655.6,516.975 646.525,514.75 636.125,513.475 625.4,513.475 609.85,513.475 594.9,516.175 581.05,521.1L581.975,520.825 450.6,567.675 450.6,493.1 458.1,490.45C484.35,481.725,515.2,474.95,547.025,471.425L549.1,471.225C560.8,469.975 574.35,469.275 588.075,469.275 635,469.275 680,477.55 721.65,492.75L718.95,491.875C776.675,510.65 782.675,537.85 768.175,556.6 754.2,570.525 737.3,581.55 718.475,588.65L717.5,588.975 450.575,686.05 450.575,614.325 451.225,613.6z M305.775,106.2L305.775,654.375 428.075,693.775 428.075,234.025C428.075,212.475 437.575,198.075 452.875,203.075 472.75,208.7 476.625,228.5 476.625,250.1L476.625,433.65C552.875,470.925 612.9,433.575 612.9,335.175 612.9,234.05 577.725,189.125 474.25,153.125 429.625,136.925 373.25,120.775 315.575,108L305.85,106.2 305.775,106.2z",
+                                            new Matrix(
+                                                        0.111834,
+                                                        0,
+                                                        0,
+                                                        0.109248,
+                                                        1237.45,
+                                                        737.829),
+                                            30,
+                                            1);
+
+                                                     
+
         // Final
         DrawingGroup drawing_2 = new DrawingGroup();
         drawing_2.Opacity = 1.0;
@@ -265,7 +504,11 @@ public class DrawingImageCreator
         drawing_2.Children.Add(l1Button);
         drawing_2.Children.Add(optionsButton);
         drawing_2.Children.Add(shareButton);
-       
+        drawing_2.Children.Add(shareButtonIcon);
+        drawing_2.Children.Add(optionsButtonIcon);
+        drawing_2.Children.Add(rightJoystickGroup);
+        drawing_2.Children.Add(leftJoystickGroup);
+        drawing_2.Children.Add(unknown);
 
         DrawingGroup drawing_1 = new DrawingGroup();
         drawing_1.ClipGeometry = Geometry.Parse("M0,0 V892 H1117 V0 H0 Z");
@@ -511,4 +754,59 @@ public class DrawingImageCreator
         dg.Children.Add(gd);
         return dg;
     }
-}
+     // General class used to create shapes with 3 parts/geometry drawings
+     private DrawingGroup Create3PartShape(string geometry1, string geometry2, string geometry3, double penThickness, double opacity, Matrix transform, Matrix? transform2 = null)
+     {
+        GeometryDrawing gd1 = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = penThickness,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = Geometry.Parse(geometry1)
+        };
+
+
+        GeometryDrawing gd2 = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = penThickness,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = Geometry.Parse(geometry2)
+        };
+
+        GeometryDrawing gd3 = new GeometryDrawing
+        {
+            Pen = new Pen
+            {
+                Brush = Brushes.Black,
+                Thickness = penThickness,
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round,
+                LineJoin = PenLineJoin.Round
+            },
+            Geometry = Geometry.Parse(geometry3)
+        };
+
+        DrawingGroup dg = new DrawingGroup
+        {
+            Opacity = opacity,
+            Transform = new MatrixTransform(transform)
+        };
+
+        dg.Children.Add(gd1);
+        dg.Children.Add(gd2);
+        dg.Children.Add(gd3);
+        return dg;
+    }
+
+ }
