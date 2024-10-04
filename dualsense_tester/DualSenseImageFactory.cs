@@ -5,8 +5,15 @@ using System.Windows.Navigation;
 
 public class DrawingImageCreator
 {
-    public DrawingImage CreateDualSenseDrawingImage()
+    // Componenets of the dualsense image
+    private Dictionary<string, DrawingGroup> components;
+    private DrawingGroup dualsense;
+    public DrawingImage dualsenseImg { get; private set; }
+
+    public DrawingImageCreator()
     {
+        components = new Dictionary<string, DrawingGroup>();
+
         // X button outline and Icon
         DrawingGroup xIcon = CreateShape(
             "F0 M1117,892z M0,0z M1639.49,679.525L1672.29,712.319 M1672.29,679.525L1639.49,712.319",
@@ -24,7 +31,10 @@ public class DrawingImageCreator
             4,
             1
         );
-        //// Square Icon and outline
+        components.Add("x icon", xIcon);
+        components.Add("x outline", xButtonOutline);
+
+        // Square Icon and outline
         DrawingGroup squareIcon = CreateShape(
             "M 1634.48,533.609 H 1671.787 V 570.916 H 1634.48 Z",
             new Matrix(0.923202, 0, 0, 0.90186, 75.2895, 121.747),
@@ -41,8 +51,10 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("square Icon", squareIcon);
+        components.Add("square outline", squareOutline);
 
-        //// Triangle Icon and outline
+        // Triangle Icon and outline
         DrawingGroup triangleIcon = CreateShape(
             "F0 M1117,892z M0,0z M1668.06,540.081L1689.09,574.313 1647.02,574.313 1668.06,540.081z",
             new Matrix(1.00662, 0, 0, 0.997527, -3.92375, -7.67218),
@@ -58,8 +70,10 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("triangle icon", triangleIcon);
+        components.Add("triangle outline", triangleOutline);
 
-        //// Circle button icon and outline
+        // Circle button icon and outline
         DrawingGroup circleOutline = CreateShape(
             34.957,
             34.957,
@@ -76,6 +90,8 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("circle outline", circleOutline);
+        components.Add("circle icon", circleIcon);
 
         // R2 Button
         DrawingGroup r2Button = CreateShape(
@@ -84,6 +100,7 @@ public class DrawingImageCreator
             3.46,
             1
         );
+        components.Add("r2", r2Button);
 
         //
         // L2 Button
@@ -94,6 +111,7 @@ public class DrawingImageCreator
             3.46,
             1
         );
+        components.Add("l2", l2Button);
 
         //
         // Up d pad key
@@ -104,6 +122,8 @@ public class DrawingImageCreator
             new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -26.3824),
             new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -26.3824)
         );
+        components.Add("up button", upButton);
+
         //
         // Down D pad Button
         //
@@ -113,18 +133,18 @@ public class DrawingImageCreator
             new Matrix(1, 0, 0, 1, 0, 3),
             new Matrix(1.04799, 0, 0, -1.02376, -59.2527, 1264.91)
         );
+        components.Add("down button", downButton);
 
         //
-        // Right D pad Key
+        // Right D pad Key and outline
         //
-
-        // Right D pad key outline
         DrawingGroup rightButton = CreateDPadButton(
             "F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.458C864.909,572.736 867.3,578.778 871.596,583.357 878.24,590.438 888.25,601.106 894.029,607.265 895.224,608.538 896.884,609.272 898.63,609.299 900.376,609.326 902.058,608.643 903.292,607.407 909.386,601.302 920.069,590.597 927.192,583.461 931.813,578.831 934.408,572.556 934.408,566.015 934.408,559.291 934.408,550.257 934.408,542.109z",
             "F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z",
             new Matrix(1, 0, 0, 1, 0, 3),
             new Matrix(6.41709E-17, -1.02376, -1.04799, -6.26875E-17, 1543.94, 1539.75)
         );
+        components.Add("right button", rightButton);
 
         //
         // Left D Pad Key
@@ -135,6 +155,7 @@ public class DrawingImageCreator
             new Matrix(1, 0, 0, 1, 0, 3),
             new Matrix(-6.41709E-17, -1.02376, 1.04799, -6.26875E-17, 223.22, 1539.75)
         );
+        components.Add("left button", leftButton);
 
         //
         // Controller Bottom
@@ -145,6 +166,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("controller bottom", controllerBottom);
 
         //
         // Mic Button
@@ -155,6 +177,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("mic button", micButton);
 
         //
         // Right Side of top of controller
@@ -165,6 +188,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("controller top right", controllerTopRight);
 
         //
         // Left side of top of controller
@@ -175,6 +199,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("controller top left", controllerTopLeft);
 
         //
         // Right Side Handle
@@ -185,6 +210,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("right handle", rightHandle);
 
         //
         // Left side handle/grip of controller
@@ -195,6 +221,8 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("left handle", leftHandle);
+
         //
         // touch pad outline
         //
@@ -204,6 +232,7 @@ public class DrawingImageCreator
             4.01,
             1
         );
+        components.Add("touch pad", touchPad);
 
         //
         // R1/R bumper button
@@ -214,6 +243,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("right bumper button", r1Button);
 
         //
         // Left bumper button
@@ -224,6 +254,7 @@ public class DrawingImageCreator
             4,
             1
         );
+        components.Add("left bumper button", l1Button);
 
         //
         // Options Button
@@ -234,6 +265,7 @@ public class DrawingImageCreator
             4.45,
             1
         );
+        components.Add("options button", optionsButton);
 
         //
         // Share button
@@ -244,6 +276,7 @@ public class DrawingImageCreator
             4.45,
             1
         );
+        components.Add("share button", shareButton);
 
         //
         // Share Button Icon
@@ -256,6 +289,7 @@ public class DrawingImageCreator
             1,
             new Matrix(1.04799, 0, 0, 1.02376, -60.7353, -17.8077)
         );
+        components.Add("share button icon", shareButtonIcon);
 
         //
         // Options Button Icon
@@ -289,6 +323,7 @@ public class DrawingImageCreator
         optionsButtonIcon.Children.Add(line1);
         optionsButtonIcon.Children.Add(line2);
         optionsButtonIcon.Children.Add(line3);
+        components.Add("options button icon", optionsButtonIcon);
 
         //
         // Right Joystick and right joystick outline
@@ -321,6 +356,7 @@ public class DrawingImageCreator
 
         rightJoystickGroup.Children.Add(rightJoystick);
         rightJoystickGroup.Children.Add(rightOutline);
+        components.Add("right joystick", rightJoystickGroup);
 
         //
         // Left Joystick Outline and left joystick
@@ -330,7 +366,7 @@ public class DrawingImageCreator
             78.002,
             1493.18,
             791.553,
-            new Matrix(1.11981, 0, 0, 1.11981, -599.389, -89.8877),
+            new Matrix(1.11981, 0, 0, 1.11981, -580.389, -89.8877),
             1,
             3.57
         );
@@ -353,14 +389,18 @@ public class DrawingImageCreator
 
         leftJoystickGroup.Children.Add(leftOutline);
         leftJoystickGroup.Children.Add(leftJoystick);
+        components.Add("left joystick", leftJoystickGroup);
 
-        // unknown
-        DrawingGroup unknown = CreateShape(
+        //
+        // Playstation Icon Button
+        //
+        DrawingGroup psIcon = CreateShape(
             "F1 M1117,892z M0,0z M81.55,606.2C22.2,589.175 12.375,554.1 39.3,533.725 58.7,520.975 81,509.875 104.6,501.525L106.775,500.85 282.2,437.95 282.2,510.2 156.45,556.175C134.425,564.65 130.675,575.925 148.975,581.975 158.1,584.3 168.55,585.65 179.325,585.65 194.7,585.65 209.425,582.925 223.05,577.95L222.175,578.225 282.725,556.175 282.725,620.975C278.975,621.9 274.725,622.35 270.55,623.25 251.175,626.65 228.875,628.6 206.125,628.6 161.675,628.6 118.975,621.15 79.175,607.45L81.925,608.275 81.55,606.2z M451.225,613.6L647.925,542.525C670.25,534.475 673.725,523 655.6,516.975 646.525,514.75 636.125,513.475 625.4,513.475 609.85,513.475 594.9,516.175 581.05,521.1L581.975,520.825 450.6,567.675 450.6,493.1 458.1,490.45C484.35,481.725,515.2,474.95,547.025,471.425L549.1,471.225C560.8,469.975 574.35,469.275 588.075,469.275 635,469.275 680,477.55 721.65,492.75L718.95,491.875C776.675,510.65 782.675,537.85 768.175,556.6 754.2,570.525 737.3,581.55 718.475,588.65L717.5,588.975 450.575,686.05 450.575,614.325 451.225,613.6z M305.775,106.2L305.775,654.375 428.075,693.775 428.075,234.025C428.075,212.475 437.575,198.075 452.875,203.075 472.75,208.7 476.625,228.5 476.625,250.1L476.625,433.65C552.875,470.925 612.9,433.575 612.9,335.175 612.9,234.05 577.725,189.125 474.25,153.125 429.625,136.925 373.25,120.775 315.575,108L305.85,106.2 305.775,106.2z",
             new Matrix(0.111834, 0, 0, 0.109248, 1237.45, 737.829),
             30,
             1
         );
+        components.Add("ps icon", psIcon);
 
         // Final
         DrawingGroup drawing_2 = new DrawingGroup();
@@ -369,45 +409,31 @@ public class DrawingImageCreator
             new Matrix(0.954207, 0, 0, 0.976787, -664.382, -247.343)
         );
 
-        drawing_2.Children.Add(xIcon);
-        drawing_2.Children.Add(squareIcon);
-        drawing_2.Children.Add(squareOutline);
-        drawing_2.Children.Add(triangleIcon);
-        drawing_2.Children.Add(triangleOutline);
-        drawing_2.Children.Add(circleIcon);
-        drawing_2.Children.Add(circleOutline);
-        drawing_2.Children.Add(r2Button);
-        drawing_2.Children.Add(l2Button);
-        drawing_2.Children.Add(upButton);
-        drawing_2.Children.Add(downButton);
-        drawing_2.Children.Add(rightButton);
-        drawing_2.Children.Add(leftButton);
-        drawing_2.Children.Add(xButtonOutline);
-        drawing_2.Children.Add(controllerBottom);
-        drawing_2.Children.Add(micButton);
-        drawing_2.Children.Add(controllerTopRight);
-        drawing_2.Children.Add(controllerTopLeft);
-        drawing_2.Children.Add(rightHandle);
-        drawing_2.Children.Add(leftHandle);
-        drawing_2.Children.Add(touchPad);
-        drawing_2.Children.Add(r1Button);
-        drawing_2.Children.Add(l1Button);
-        drawing_2.Children.Add(optionsButton);
-        drawing_2.Children.Add(shareButton);
-        drawing_2.Children.Add(shareButtonIcon);
-        drawing_2.Children.Add(optionsButtonIcon);
-        drawing_2.Children.Add(rightJoystickGroup);
-        drawing_2.Children.Add(leftJoystickGroup);
-        drawing_2.Children.Add(unknown);
+        // Add all components from dictionary to the controller;
+        foreach (KeyValuePair<string, DrawingGroup> pair in components)
+            drawing_2.Children.Add(pair.Value);
 
-        DrawingGroup drawing_1 = new DrawingGroup();
-        drawing_1.ClipGeometry = Geometry.Parse("M0,0 V892 H1117 V0 H0 Z");
-        drawing_1.Children.Add(drawing_2);
+        dualsense = new DrawingGroup();
+        dualsense.ClipGeometry = Geometry.Parse("M0,0 V892 H1117 V0 H0 Z");
+        dualsense.Children.Add(drawing_2);
 
-        DrawingImage dualsense_pic = new DrawingImage();
-        dualsense_pic.Drawing = drawing_1;
+        dualsenseImg = new DrawingImage();
+        dualsenseImg.Drawing = dualsense;
+    }
 
-        return dualsense_pic;
+    // Shades the outline of the button in black
+    public void ChangeButtonColor(string buttonName, Brush color)
+    {
+        DrawingGroup button = components[buttonName];
+        if (dualsense.Children[0] is DrawingGroup drawing_2)
+        {
+            drawing_2.Children.Remove(button);
+            if (button.Children[0] is GeometryDrawing gd)
+            {
+                gd.Brush = color;
+            }
+            drawing_2.Children.Add(button);
+        }
     }
 
     // General class used to create shapes with only one drawing group and one geometry drawing using an ellipse
@@ -424,7 +450,7 @@ public class DrawingImageCreator
         // Creates outline for shape buttons
         GeometryDrawing outlineGD = new GeometryDrawing
         {
-            Brush = Brushes.Black,
+            //Brush = Brushes.Black,
             Pen = new Pen
             {
                 Brush = Brushes.Black,
@@ -542,8 +568,7 @@ public class DrawingImageCreator
         string geometry3,
         double penThickness,
         double opacity,
-        Matrix transform,
-        Matrix? transform2 = null
+        Matrix transform
     )
     {
         GeometryDrawing gd1 = new GeometryDrawing
