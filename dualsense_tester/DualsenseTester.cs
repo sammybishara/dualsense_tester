@@ -26,7 +26,7 @@ public class DualSenseTester
         ds.BeginPolling(4);
     }
 
-    // Handler to update positions of joysticks and touchpad
+    // Handler to update joystick positions and touch pad positions 
     private void OnStatePolled(DualSense ds) {
         DualSenseInputState state = ds.InputState;
         Vec2 left_joystick = state.LeftAnalogStick;
@@ -43,9 +43,11 @@ public class DualSenseTester
         });
     }
 
-    // handler to capture any buttons pressed or released
+    // Handler to capture any buttons pressed or released
     private void OnButtonsPressed(DualSense ds, DualSenseInputStateButtonDelta delta)
     {
+        // If no observerable button changes, return
+        if (!delta.HasChanges) return;
         UpdateButtonColor(delta.SquareButton, "square outline");
         UpdateButtonColor(delta.CircleButton, "circle outline");
         UpdateButtonColor(delta.TriangleButton, "triangle outline");
@@ -63,6 +65,8 @@ public class DualSenseTester
         UpdateButtonColor(delta.LogoButton, "ps icon");
         UpdateButtonColor(delta.CreateButton, "share button");
         UpdateButtonColor(delta.MenuButton, "options button");
+        UpdateButtonColor(delta.R3Button, "right joystick");
+        UpdateButtonColor(delta.L3Button, "left joystick");
 
         // Redraw the image on the UI thread
         mainWindow.Dispatcher.Invoke(() =>
@@ -73,14 +77,22 @@ public class DualSenseTester
 
     private void UpdateButtonColor(ButtonDeltaState state, string buttonName)
     {
-        if (state == ButtonDeltaState.NoChange)
-            return;
-        Brush color = state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.Transparent;
+        if (state == ButtonDeltaState.NoChange) return;
 
-        mainWindow.Dispatcher.Invoke(() =>
+        if (buttonName == "left joystick" || buttonName == "right joystick")
         {
-            dualsenseImg.ChangeButtonColor(buttonName, color);
-        });
+            mainWindow.Dispatcher.Invoke(() =>
+            {
+                dualsenseImg.ChangeJoystickColor(buttonName, state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.White);
+            });
+        }
+        else
+        {
+            mainWindow.Dispatcher.Invoke(() =>
+            {
+                dualsenseImg.ChangeButtonColor(buttonName, state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.Transparent);
+            });
+        }
     }
 
 }

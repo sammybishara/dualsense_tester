@@ -438,6 +438,14 @@ public class DrawingImageCreator
         }
     }
 
+    public void ChangeJoystickColor(string buttonName, Brush color) {
+        if (components[buttonName] is DrawingGroup joystickGroup) {
+            if (joystickGroup.Children[1] is DrawingGroup joystick) {
+                if (joystick.Children[0] is GeometryDrawing gd) gd.Brush = color;
+            }
+        }
+    }
+
     public void MoveJoystick(double x, double y, string joystick_name) {
         double x_center = 1493.18, y_center = 791.553;
         double radius = 78.002;
