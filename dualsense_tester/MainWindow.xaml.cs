@@ -1,18 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using HidLibrary;
 using HidSharp;
+using System.Windows.Threading;
 
 namespace dualsense_tester
 {
@@ -21,10 +10,14 @@ namespace dualsense_tester
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DrawingImage img;
+        private DispatcherTimer _frameTimer;
         public MainWindow()
         {
             InitializeComponent();
             startListening();
+            // Target fps is currently set to 120
+            StartRendering(120);
         }
 
         private void startListening()
@@ -40,9 +33,33 @@ namespace dualsense_tester
             }
         }
 
-        public void UpdateWindow(DrawingImage img)
+        public void UpdateImage(DrawingImage newImg)
+        {
+            img = newImg;
+        }
+
+        public void RenderFrame()
         {
             dualsense_img.Source = img;
         }
+
+        public void StartRendering(int targetFPS) {
+            // Calculate interval based on target FPS
+            TimeSpan interval = TimeSpan.FromMilliseconds(1000 / targetFPS);
+
+            // Set up the timer
+            _frameTimer = new DispatcherTimer
+            {
+                Interval = interval
+            };
+
+            _frameTimer.Tick += (s, e) =>
+            {
+                RenderFrame(); // Call the rendering method
+            };
+
+            _frameTimer.Start();
+        }
+
     }
 }

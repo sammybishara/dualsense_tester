@@ -1,7 +1,5 @@
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
 
 public class DrawingImageCreator
 {
@@ -29,7 +27,8 @@ public class DrawingImageCreator
             525.401,
             new Matrix(1.04799, 0, 0, 1.02376, -69.8487, 153.587),
             4,
-            1
+            1,
+            Brushes.Transparent
         );
         components.Add("x icon", xIcon);
         components.Add("x outline", xButtonOutline);
@@ -49,7 +48,8 @@ public class DrawingImageCreator
             525.401,
             new Matrix(1.04799, 0, 0, 1.02376, -143.208, 81.9239),
             4,
-            1
+            1,
+            Brushes.Transparent
         );
         components.Add("square Icon", squareIcon);
         components.Add("square outline", squareOutline);
@@ -68,7 +68,8 @@ public class DrawingImageCreator
             525.401,
             new Matrix(1.04799, 0, 0, 1.02376, -69.8487, 10.2604),
             4,
-            1
+            1,
+            Brushes.Transparent
         );
         components.Add("triangle icon", triangleIcon);
         components.Add("triangle outline", triangleOutline);
@@ -81,7 +82,8 @@ public class DrawingImageCreator
             525.401,
             new Matrix(1.04799, 0, 0, 1.02376, 3.51071, 81.9239),
             1,
-            4
+            4,
+            Brushes.Transparent
         );
 
         DrawingGroup circleIcon = CreateShape(
@@ -335,7 +337,8 @@ public class DrawingImageCreator
             791.553,
             new Matrix(1.11981, 0, 0, 1.11981, -187.697, -89.8877),
             1,
-            3.57
+            3.57,
+            Brushes.Transparent
         );
 
         DrawingGroup rightJoystick = CreateShape(
@@ -345,7 +348,8 @@ public class DrawingImageCreator
             791.553,
             new Matrix(0.733227, 0, 0, 0.733227, 389.538, 216.112),
             1,
-            5.46
+            5.46,
+            Brushes.White
         );
 
         DrawingGroup rightJoystickGroup = new DrawingGroup
@@ -354,8 +358,9 @@ public class DrawingImageCreator
             Transform = new MatrixTransform(new Matrix(1.04799, 0, 0, 1.02376, -59.2527, -21.0995)),
         };
 
-        rightJoystickGroup.Children.Add(rightJoystick);
+
         rightJoystickGroup.Children.Add(rightOutline);
+        rightJoystickGroup.Children.Add(rightJoystick);
         components.Add("right joystick", rightJoystickGroup);
 
         //
@@ -368,7 +373,8 @@ public class DrawingImageCreator
             791.553,
             new Matrix(1.11981, 0, 0, 1.11981, -580.389, -89.8877),
             1,
-            3.57
+            3.57,
+            Brushes.White
         );
 
         DrawingGroup leftJoystick = CreateShape(
@@ -378,7 +384,8 @@ public class DrawingImageCreator
             791.553,
             new Matrix(0.733227, 0, 0, 0.733227, -2.1542, 216.112),
             1,
-            5.46
+            5.46,
+            Brushes.White
         );
 
         DrawingGroup leftJoystickGroup = new DrawingGroup
@@ -425,15 +432,37 @@ public class DrawingImageCreator
     public void ChangeButtonColor(string buttonName, Brush color)
     {
         DrawingGroup button = components[buttonName];
-        if (dualsense.Children[0] is DrawingGroup drawing_2)
+        if (button.Children[0] is GeometryDrawing gd)
         {
-            drawing_2.Children.Remove(button);
-            if (button.Children[0] is GeometryDrawing gd)
-            {
-                gd.Brush = color;
-            }
-            drawing_2.Children.Add(button);
+            gd.Brush = color;
         }
+    }
+
+    public void MoveJoystick(double x, double y, string joystick_name) {
+        double x_center = 1493.18, y_center = 791.553;
+        double radius = 78.002;
+
+        // Calculate new position based on x and y inputs
+        double new_x = x_center + (radius * x);
+        double new_y = y_center - (radius * y);
+
+        // Get the joystick DrawingGroup from components
+        if (components[joystick_name] is DrawingGroup joystick_group) {
+
+            if (joystick_group.Children[1] is DrawingGroup joystick) {
+
+                if (joystick.Children[0] is GeometryDrawing gd)
+                {
+                    gd.Geometry = new EllipseGeometry
+                    {
+                        RadiusX = radius,
+                        RadiusY = radius,
+                        Center = new Point(new_x, new_y)
+                    };
+                }
+            }
+        }
+
     }
 
     // General class used to create shapes with only one drawing group and one geometry drawing using an ellipse
@@ -444,13 +473,14 @@ public class DrawingImageCreator
         double centerY,
         Matrix matrix,
         int opacity,
-        double brushThickness
+        double brushThickness,
+        SolidColorBrush brushColor
     )
     {
         // Creates outline for shape buttons
         GeometryDrawing outlineGD = new GeometryDrawing
         {
-            //Brush = Brushes.Black,
+            Brush = brushColor,
             Pen = new Pen
             {
                 Brush = Brushes.Black,

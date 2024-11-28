@@ -12,7 +12,7 @@ public class DualSenseTester
     {
         this.mainWindow = mainWindow;
         this.dualsenseImg = new DrawingImageCreator();
-        mainWindow.UpdateWindow(dualsenseImg.dualsenseImg);
+        mainWindow.UpdateImage(dualsenseImg.dualsenseImg);
         DualSense ds = DualSense.EnumerateControllers().First();
         ds.Acquire();
         Poll(ds);
@@ -22,10 +22,28 @@ public class DualSenseTester
     private void Poll(DualSense ds)
     {
         ds.OnButtonStateChanged += OnButtonsPressed;
+        ds.OnStatePolled += OnStatePolled;
         ds.BeginPolling(4);
     }
 
-    // handler to capture any buttons changed
+    // Handler to update positions of joysticks and touchpad
+    private void OnStatePolled(DualSense ds) {
+        DualSenseInputState state = ds.InputState;
+        Vec2 left_joystick = state.LeftAnalogStick;
+        Vec2 right_joystick = state.RightAnalogStick;
+       
+        mainWindow.Dispatcher.Invoke(() => {
+            dualsenseImg.MoveJoystick(left_joystick.X, left_joystick.Y, "left joystick");
+            dualsenseImg.MoveJoystick(right_joystick.X, right_joystick.Y, "right joystick");
+        });
+
+        mainWindow.Dispatcher.Invoke(() =>
+        {
+            mainWindow.UpdateImage(dualsenseImg.dualsenseImg);
+        });
+    }
+
+    // handler to capture any buttons pressed or released
     private void OnButtonsPressed(DualSense ds, DualSenseInputStateButtonDelta delta)
     {
         UpdateButtonColor(delta.SquareButton, "square outline");
@@ -49,7 +67,7 @@ public class DualSenseTester
         // Redraw the image on the UI thread
         mainWindow.Dispatcher.Invoke(() =>
         {
-            mainWindow.UpdateWindow(dualsenseImg.dualsenseImg);
+            mainWindow.UpdateImage(dualsenseImg.dualsenseImg);
         });
     }
 
@@ -64,4 +82,5 @@ public class DualSenseTester
             dualsenseImg.ChangeButtonColor(buttonName, color);
         });
     }
+
 }
