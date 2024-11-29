@@ -1,9 +1,12 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	
     <DrawingImage x:Key="dualsense_picDrawingImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V892 H1117 V0 H0 Z">
                 <DrawingGroup Opacity="1" Transform="0.954207,0,0,0.976787,-664.382,-247.343">
+
+					<!-- X icon shape -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-60.1837,-20.9858">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1639.49,679.525L1672.29,712.319 M1672.29,679.525L1639.49,712.319">
                             <GeometryDrawing.Pen>
@@ -11,6 +14,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+
+					<!-- Square Icon -->
                     <DrawingGroup Opacity="1" Transform="0.923202,0,0,0.90186,75.2895,121.747">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
@@ -21,6 +26,8 @@
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
+
+					<!-- Triangle Icon -->
                     <DrawingGroup Opacity="1" Transform="1.00662,0,0,0.997527,-3.92375,-7.67218">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1668.06,540.081L1689.09,574.313 1647.02,574.313 1668.06,540.081z">
                             <GeometryDrawing.Pen>
@@ -28,6 +35,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- Circle Icon -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-63.5968,-18.369">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
@@ -38,6 +47,8 @@
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- R2 Button -->
                     <DrawingGroup Opacity="1" Transform="1.19695,0,0,1.20074,-286.588,-56.1541">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1579.77,357.225L1679.77,357.225C1690.55,357.225 1678.68,262.657 1610.67,262.657 1578,262.657 1565.31,357.225 1579.77,357.225z">
                             <GeometryDrawing.Pen>
@@ -45,6 +56,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- L2 Button -->
                     <DrawingGroup Opacity="1" Transform="-1.19695,0,0,1.20074,2851.49,-56.1541">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1579.77,357.225L1679.77,357.225C1690.55,357.225 1678.68,262.657 1610.67,262.657 1578,262.657 1565.31,357.225 1579.77,357.225z">
                             <GeometryDrawing.Pen>
@@ -52,6 +65,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- Up d pad key-->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-59.2527,-26.3824">
                         <DrawingGroup Opacity="1" Transform="1,0,0,1,0,3">
                             <GeometryDrawing Geometry="F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.444C864.909,572.731 867.306,578.78 871.612,583.36 878.468,590.653 888.943,601.795 894.962,608.198 896.181,609.494 897.88,610.229 899.658,610.229 901.437,610.229 903.136,609.494 904.355,608.198 910.374,601.795 920.849,590.653 927.705,583.36 932.011,578.78 934.408,572.731 934.408,566.444 934.408,559.679 934.408,550.432 934.408,542.109z">
@@ -60,13 +75,18 @@
                                 </GeometryDrawing.Pen>
                             </GeometryDrawing>
                         </DrawingGroup>
+                        
                         <GeometryDrawing Brush="#FF000000" Geometry="F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z">
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- Down d pad key -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,-1.02376,-59.2527,1264.91">
+                        
+                        <!-- Down Button outline -->
                         <DrawingGroup Opacity="1" Transform="1,0,0,1,0,3">
                             <GeometryDrawing Geometry="F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.234C864.909,572.646 867.402,578.806 871.862,583.412 878.746,590.522 889.092,601.208 895.028,607.339 896.242,608.593 897.913,609.301 899.658,609.301 901.404,609.301 903.075,608.593 904.289,607.339 910.225,601.208 920.571,590.522 927.455,583.412 931.914,578.806 934.408,572.646 934.408,566.234 934.408,559.488 934.408,550.346 934.408,542.109z">
                                 <GeometryDrawing.Pen>
@@ -74,13 +94,19 @@
                                 </GeometryDrawing.Pen>
                             </GeometryDrawing>
                         </DrawingGroup>
+                        
+                        <!-- down Button Icon-->
                         <GeometryDrawing Brush="#FF000000" Geometry="F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z">
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- Right D pad key-->
                     <DrawingGroup Opacity="1" Transform="6.41709E-17,-1.02376,-1.04799,-6.26875E-17,1543.94,1539.75">
+                        
+                        <!-- Right button outline-->
                         <DrawingGroup Opacity="1" Transform="1,0,0,1,0,3">
                             <GeometryDrawing Geometry="F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.458C864.909,572.736 867.3,578.778 871.596,583.357 878.24,590.438 888.25,601.106 894.029,607.265 895.224,608.538 896.884,609.272 898.63,609.299 900.376,609.326 902.058,608.643 903.292,607.407 909.386,601.302 920.069,590.597 927.192,583.461 931.813,578.831 934.408,572.556 934.408,566.015 934.408,559.291 934.408,550.257 934.408,542.109z">
                                 <GeometryDrawing.Pen>
@@ -88,13 +114,19 @@
                                 </GeometryDrawing.Pen>
                             </GeometryDrawing>
                         </DrawingGroup>
+                        
+                        <!-- Right Button Icon -->
                         <GeometryDrawing Brush="#FF000000" Geometry="F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z">
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- Left d pad key -->
                     <DrawingGroup Opacity="1" Transform="-6.41709E-17,-1.02376,1.04799,-6.26875E-17,223.22,1539.75">
+                        
+                        <!-- Left Button outline -->
                         <DrawingGroup Opacity="1" Transform="1,0,0,1,0,3">
                             <GeometryDrawing Geometry="F0 M1117,892z M0,0z M934.408,542.109C934.408,530.894,925.317,521.803,914.103,521.803L885.214,521.803C874,521.803,864.909,530.894,864.909,542.109L864.909,566.458C864.909,572.736 867.3,578.778 871.596,583.357 878.24,590.438 888.25,601.106 894.029,607.265 895.224,608.538 896.884,609.272 898.63,609.299 900.376,609.326 902.058,608.643 903.292,607.407 909.386,601.302 920.069,590.597 927.192,583.461 931.813,578.831 934.408,572.556 934.408,566.015 934.408,559.291 934.408,550.257 934.408,542.109z">
                                 <GeometryDrawing.Pen>
@@ -102,12 +134,16 @@
                                 </GeometryDrawing.Pen>
                             </GeometryDrawing>
                         </DrawingGroup>
+                        
+                        <!-- Left Button Icon -->
                         <GeometryDrawing Brush="#FF000000" Geometry="F0 M1117,892z M0,0z M889.258,543.129L907.916,543.129 898.835,534.049 889.258,543.129z">
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- x Button Outline-->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-69.8487,153.587">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
@@ -118,6 +154,8 @@
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+					<!-- Square Button Outline -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-143.208,81.9239">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
@@ -128,7 +166,9 @@
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
-                    <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,3.51071,81.9239">
+					
+					<!-- Circle Button Outline-->
+                    <DrawingGroup  Opacity="1" Transform="1.04799,0,0,1.02376,3.51071,81.9239">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
@@ -138,6 +178,8 @@
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
+					
+                    <!-- Triangle Button Outline -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-69.8487,10.2604">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
@@ -148,20 +190,24 @@
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    
+                    <!-- Controller bottom -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-59.2527,-21.0995">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M821.891,1149.7C830.442,1151.31 884.247,1153.8 890.27,1146.55 924.201,1105.72 959.792,992.312 975.686,950.409 985.478,924.595 1011.09,912.527 1043.18,909.722 1073.78,923.291 1088.33,923.703 1139.89,913.315L1420.11,913.315C1471.67,923.703 1486.23,923.291 1516.82,909.722 1548.91,912.527 1574.52,924.595 1584.31,950.409 1600.21,992.312 1635.8,1105.72 1669.73,1146.55 1675.75,1153.8 1729.56,1151.31 1738.11,1149.7">
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-59.2527,-21.0995">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1003.45,436.511C1017.29,438.306,1031.13,435.352,1044.97,430">
                             <GeometryDrawing.Pen>
                                 <Pen Brush="#FF000000" Thickness="4" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                      
+                    
+                    <!-- Mic Button -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-61.8321,-20.6709">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1313.44,858.8C1313.44,855.101 1310.44,852.102 1306.75,852.102 1294.83,852.102 1270.09,852.102 1258.18,852.102 1254.48,852.102 1251.48,855.101 1251.48,858.8 1251.48,858.801 1251.48,858.801 1251.48,858.802 1251.48,862.501 1254.48,865.5 1258.18,865.5 1270.09,865.5 1294.83,865.5 1306.75,865.5 1310.44,865.5 1313.44,862.501 1313.44,858.802 1313.44,858.801 1313.44,858.801 1313.44,858.8z">
                             <GeometryDrawing.Pen>
@@ -169,6 +215,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Controller Top --> 
                     <DrawingGroup Opacity="1" Transform="-1.04799,0,0,1.02376,2623.29,-21.0995">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1003.45,436.511C1017.29,438.306,1031.13,435.352,1044.97,430">
                             <GeometryDrawing.Pen>
@@ -176,6 +224,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                   <!-- Right Side Handle--> 
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-54.0127,-21.0995">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1536.64,461.082C1538.1,454.139 1540.62,448.211 1544.23,443.324 1554.11,429.923 1572.15,424.356 1598.92,427.18 1639.66,431.477 1678.74,439.099 1714.35,449.489 1726.25,452.963 1737.83,457.763 1742.74,468.16 1833.75,661.122 1849.58,876.955 1798.65,1111.24 1795.7,1124.8 1789.6,1135.46 1777.6,1143.35 1771.76,1147.18 1765.01,1150.41 1755.71,1152.79 1734.15,1158.32 1724.67,1142.93 1722.08,1129.04 1688.66,950.214 1633.4,786.687 1530.41,678.802 1521.1,669.041 1512.23,647.121 1509.78,627.068 1508.81,619.143 1509.33,611.735 1510.24,605.032 1515.61,565.609 1524.43,519.826 1533.28,477.13 1534.4,471.724 1535.52,466.369 1536.64,461.082z">
                             <GeometryDrawing.Pen>
@@ -183,6 +233,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Left Side Handle-->
                     <DrawingGroup Opacity="1" Transform="-1.04799,0,0,1.02376,2617.56,-21.0995">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1536.64,461.082C1542.12,435.098 1562.38,423.326 1598.92,427.18 1639.66,431.477 1678.74,439.099 1714.35,449.489 1726.25,452.963 1737.83,457.763 1742.74,468.16 1833.75,661.122 1849.58,876.955 1798.65,1111.24 1795.7,1124.8 1789.6,1135.46 1777.6,1143.35 1771.76,1147.18 1765.01,1150.41 1755.71,1152.79 1734.15,1158.32 1724.67,1142.93 1722.08,1129.04 1688.66,950.214 1633.4,786.687 1530.41,678.802 1521.1,669.041 1512.23,647.121 1509.78,627.068 1508.81,619.143 1509.33,611.735 1510.24,605.032 1516.29,560.618 1526.72,508.131 1536.64,461.082z">
                             <GeometryDrawing.Pen>
@@ -190,6 +242,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Touch Pad-->
                     <DrawingGroup Opacity="1" Transform="1.03398,0,0,1.03077,-37.8634,-25.7549">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1280,410.968C1280,410.968 1295.92,410.887 1319.85,411.295 1371.4,412.176 1460.09,415.33 1506.56,426.465 1512.6,427.914 1517.79,431.384 1521.32,435.732 1525.05,440.326 1526.93,445.901 1526.02,451.109 1517.08,502.33 1505.67,560.142 1495.49,611.132 1487.46,651.356 1454.6,664.948 1427.06,664.824 1399.52,664.7 1280,664.265 1280,664.265 1280,664.265 1160.48,664.7 1132.94,664.824 1105.4,664.948 1072.54,651.356 1064.51,611.132 1054.33,560.142 1042.92,502.33 1033.98,451.109 1032.21,440.971 1041.01,429.445 1053.44,426.465 1121.47,410.163 1280,410.968 1280,410.968z">
                             <GeometryDrawing.Pen>
@@ -197,6 +251,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                   
+                    <!-- Right Bumper Button-->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-53.1719,-21.1936">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1710.79,448.465C1710.06,419.222 1559.14,376.876 1562.69,430 1572.21,426.604 1584.26,425.633 1598.92,427.18 1638.31,431.335 1676.14,438.597 1710.79,448.465z">
                             <GeometryDrawing.Pen>
@@ -204,6 +260,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Left Bumper Button-->
                     <DrawingGroup Opacity="1" Transform="-1.04799,0,0,1.02376,2617.56,-21.0995">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1710.79,448.465C1710.06,419.222 1559.14,376.876 1562.69,430 1572.21,426.604 1584.26,425.633 1598.92,427.18 1638.31,431.335 1676.14,438.597 1710.79,448.465z">
                             <GeometryDrawing.Pen>
@@ -211,6 +269,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Options Button --> 
                     <DrawingGroup Opacity="1" Transform="1.00731,0.196365,-0.166064,0.812946,93.6712,-230.389">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1550.36,480.226L1550.36,520.418C1550.36,520.418 1550.17,535.418 1565.03,535.418 1579.88,535.418 1579.7,520.418 1579.7,520.418L1579.7,480.025C1579.7,480.025 1579.89,465.024 1565.03,465.126 1550.17,465.227 1550.36,480.226 1550.36,480.226z">
                             <GeometryDrawing.Pen>
@@ -218,6 +278,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Share Button-->
                     <DrawingGroup Opacity="1" Transform="-1.00731,0.196365,0.166064,0.812946,2489.53,-230.389">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1566.37,476.359L1566.37,516.552C1566.37,516.552 1566.18,531.552 1581.04,531.552 1595.89,531.552 1595.71,516.552 1595.71,516.552L1595.71,476.158C1595.71,476.158 1595.89,461.157 1581.04,461.259 1566.18,461.36 1566.37,476.359 1566.37,476.359z">
                             <GeometryDrawing.Pen>
@@ -225,6 +287,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                    <!-- Share Button Icon -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-60.7353,-17.8077">
                         <GeometryDrawing Geometry="F0 M1117,892z M0,0z M985.029,452.795L980.502,445.716 985.029,452.795z">
                             <GeometryDrawing.Pen>
@@ -242,6 +306,8 @@
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>
+                    
+                   <!-- Options Button Icon --> 
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-59.2527,-21.0995">
                         <DrawingGroup Opacity="1" Transform="1,0,0,1,-3,-2">
                             <GeometryDrawing Geometry="F0 M1117,892z M0,0z M1580.81,444.569L1566.83,444.569 1580.81,444.569z">
@@ -265,9 +331,13 @@
                             </GeometryDrawing>
                         </DrawingGroup>
                     </DrawingGroup>
+                    
+                    <!-- Right Joystick Outline -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-59.2527,-21.0995">
+			    
+			<!-- Right Joystick Outline -->
                         <DrawingGroup Opacity="1" Transform="1.11981,0,0,1.11981,-187.697,-89.8877">
-                            <GeometryDrawing Brush="#FFEBEBEB">
+                            <GeometryDrawing Brush="#FFFFFFFF">
                                 <GeometryDrawing.Pen>
                                     <Pen Brush="#FF000000" Thickness="3.57" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                                 </GeometryDrawing.Pen>
@@ -276,8 +346,10 @@
                                 </GeometryDrawing.Geometry>
                             </GeometryDrawing>
                         </DrawingGroup>
+						
+						<!-- Right Joystick -->
                         <DrawingGroup Opacity="1" Transform="0.733227,0,0,0.733227,389.538,216.112">
-                            <GeometryDrawing Brush="#FF000000">
+                            <GeometryDrawing Brush="#FFFFFFFF">
                                 <GeometryDrawing.Pen>
                                     <Pen Brush="#FF000000" Thickness="5.46" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                                 </GeometryDrawing.Pen>
@@ -287,7 +359,11 @@
                             </GeometryDrawing>
                         </DrawingGroup>
                     </DrawingGroup>
+		
+		
+			<!-- Left Joystick and Left joystick outline -->
                     <DrawingGroup Opacity="1" Transform="1.04799,0,0,1.02376,-59.2527,-21.0995">
+			    
                         <DrawingGroup Opacity="1" Transform="1.11981,0,0,1.11981,-599.389,-89.8877">
                             <GeometryDrawing>
                                 <GeometryDrawing.Pen>
@@ -298,8 +374,10 @@
                                 </GeometryDrawing.Geometry>
                             </GeometryDrawing>
                         </DrawingGroup>
+						
+						<!-- Left joystick-->
                         <DrawingGroup Opacity="1" Transform="0.733227,0,0,0.733227,-22.1542,216.112">
-                            <GeometryDrawing Brush="#FF000000">
+                            <GeometryDrawing Brush="#00000000">
                                 <GeometryDrawing.Pen>
                                     <Pen Brush="#FF000000" Thickness="5.46" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
                                 </GeometryDrawing.Pen>
