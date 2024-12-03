@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Media;
 using dualsense_tester;
 using DualSenseAPI;
@@ -6,13 +7,14 @@ using DualSenseAPI.State;
 public class DualSenseTester
 {
     private MainWindow mainWindow;
-    private DrawingImageCreator dualsenseImg;
+    private DualSenseImageCreator dualsenseImgCreator;
+    public DrawingImage dualsenseImg { get; private set; } 
 
     public DualSenseTester(MainWindow mainWindow)
     {
         this.mainWindow = mainWindow;
-        this.dualsenseImg = new DrawingImageCreator();
-        mainWindow.UpdateImage(dualsenseImg.dualsenseImg);
+        this.dualsenseImgCreator = new DualSenseImageCreator();
+        this.dualsenseImg = dualsenseImgCreator.dualsenseImg;
         DualSense ds = DualSense.EnumerateControllers().First();
         ds.Acquire();
         Poll(ds);
@@ -23,7 +25,7 @@ public class DualSenseTester
     {
         ds.OnButtonStateChanged += OnButtonsPressed;
         ds.OnStatePolled += OnStatePolled;
-        ds.BeginPolling(4);
+        ds.BeginPolling(1);
     }
 
     // Handler to update joystick positions and touch pad positions 
@@ -31,15 +33,15 @@ public class DualSenseTester
         DualSenseInputState state = ds.InputState;
         Vec2 left_joystick = state.LeftAnalogStick;
         Vec2 right_joystick = state.RightAnalogStick;
+        DualSenseAPI.Touch touch1 = state.Touchpad1;
+        DualSenseAPI.Touch touch2 = state.Touchpad2;
        
         mainWindow.Dispatcher.Invoke(() => {
-            dualsenseImg.MoveJoystick(left_joystick.X, left_joystick.Y, "left joystick");
-            dualsenseImg.MoveJoystick(right_joystick.X, right_joystick.Y, "right joystick");
-        });
-
-        mainWindow.Dispatcher.Invoke(() =>
-        {
-            mainWindow.UpdateImage(dualsenseImg.dualsenseImg);
+            dualsenseImgCreator.MoveJoystick(left_joystick.X, left_joystick.Y, "left joystick");
+            dualsenseImgCreator.MoveJoystick(right_joystick.X, right_joystick.Y, "right joystick");
+            dualsenseImgCreator.ToggleTouchPadPoint("touch point 1", touch1);
+            dualsenseImgCreator.ToggleTouchPadPoint("touch point 2", touch2 );
+            dualsenseImg = dualsenseImgCreator.dualsenseImg;
         });
     }
 
@@ -67,32 +69,22 @@ public class DualSenseTester
         UpdateButtonColor(delta.MenuButton, "options button");
         UpdateButtonColor(delta.R3Button, "right joystick");
         UpdateButtonColor(delta.L3Button, "left joystick");
-
-        // Redraw the image on the UI thread
-        mainWindow.Dispatcher.Invoke(() =>
-        {
-            mainWindow.UpdateImage(dualsenseImg.dualsenseImg);
-        });
     }
 
     private void UpdateButtonColor(ButtonDeltaState state, string buttonName)
     {
         if (state == ButtonDeltaState.NoChange) return;
 
-        if (buttonName == "left joystick" || buttonName == "right joystick")
+        mainWindow.Dispatcher.Invoke(() =>
         {
-            mainWindow.Dispatcher.Invoke(() =>
-            {
-                dualsenseImg.ChangeJoystickColor(buttonName, state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.White);
-            });
-        }
-        else
-        {
-            mainWindow.Dispatcher.Invoke(() =>
-            {
-                dualsenseImg.ChangeButtonColor(buttonName, state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.Transparent);
-            });
-        }
-    }
+                
+            if (buttonName == "left joystick" || buttonName == "right joystick") {
+                dualsenseImgCreator.ChangeJoystickColor(buttonName, state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.White);
+            } else {
+                dualsenseImgCreator.ChangeButtonColor(buttonName, state == ButtonDeltaState.Pressed ? Brushes.Black : Brushes.Transparent);
+            }
 
+                
+        });
+    }
 }

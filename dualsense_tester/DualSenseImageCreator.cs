@@ -1,17 +1,19 @@
 using System.Windows;
 using System.Windows.Media;
 
-public class DrawingImageCreator
+public class DualSenseImageCreator
 {
-    // Componenets of the dualsense image
+    // Components of the dualsense image
     private Dictionary<string, DrawingGroup> components;
-    private DrawingGroup dualsense;
+    private DrawingGroup dualsenseImgGroup;
+    private DrawingGroup touchPoint1;
+    private DrawingGroup touchPoint2;
+
     public DrawingImage dualsenseImg { get; private set; }
 
-    public DrawingImageCreator()
+    public DualSenseImageCreator()
     {
         components = new Dictionary<string, DrawingGroup>();
-
         // X button outline and Icon
         DrawingGroup xIcon = CreateShape(
             "F0 M1117,892z M0,0z M1639.49,679.525L1672.29,712.319 M1672.29,679.525L1639.49,712.319",
@@ -228,12 +230,38 @@ public class DrawingImageCreator
         //
         // touch pad outline
         //
+        Matrix matrix = new Matrix(1.03398, 0, 0, 1.03077, -37.8634, -25.7549);
         DrawingGroup touchPad = CreateShape(
             "F0 M1117,892z M0,0z M1280,410.968C1280,410.968 1295.92,410.887 1319.85,411.295 1371.4,412.176 1460.09,415.33 1506.56,426.465 1512.6,427.914 1517.79,431.384 1521.32,435.732 1525.05,440.326 1526.93,445.901 1526.02,451.109 1517.08,502.33 1505.67,560.142 1495.49,611.132 1487.46,651.356 1454.6,664.948 1427.06,664.824 1399.52,664.7 1280,664.265 1280,664.265 1280,664.265 1160.48,664.7 1132.94,664.824 1105.4,664.948 1072.54,651.356 1064.51,611.132 1054.33,560.142 1042.92,502.33 1033.98,451.109 1032.21,440.971 1041.01,429.445 1053.44,426.465 1121.47,410.163 1280,410.968 1280,410.968z",
-            new Matrix(1.03398, 0, 0, 1.03077, -37.8634, -25.7549),
+            matrix,
             4.01,
             1
         );
+
+        // Touch pad points only shown when user swipes on the touchpad
+        Rect bounds = touchPad.Bounds;
+        Point center = new Point(bounds.X + bounds.Width / 2, bounds.Y + bounds.Height / 2);
+
+        touchPoint1 = CreateShape(
+            19.473,
+            19.473,
+            bounds.X + bounds.Width / 2,
+            bounds.Y + bounds.Height / 2,
+            matrix,
+            1,
+            4,
+            Brushes.Red);
+
+        touchPoint2 = CreateShape(
+            19.473,
+            19.473,
+            bounds.X + bounds.Width / 2,
+            bounds.Y + bounds.Height / 2,
+            matrix,
+            1,
+            4,
+            Brushes.Red);
+
         components.Add("touch pad", touchPad);
 
         //
@@ -420,12 +448,12 @@ public class DrawingImageCreator
         foreach (KeyValuePair<string, DrawingGroup> pair in components)
             drawing_2.Children.Add(pair.Value);
 
-        dualsense = new DrawingGroup();
-        dualsense.ClipGeometry = Geometry.Parse("M0,0 V892 H1117 V0 H0 Z");
-        dualsense.Children.Add(drawing_2);
+        dualsenseImgGroup = new DrawingGroup();
+        dualsenseImgGroup.ClipGeometry = Geometry.Parse("M0,0 V892 H1117 V0 H0 Z");
+        dualsenseImgGroup.Children.Add(drawing_2);
 
         dualsenseImg = new DrawingImage();
-        dualsenseImg.Drawing = dualsense;
+        dualsenseImg.Drawing = dualsenseImgGroup;
     }
 
     // Shades the outline of the button in black
@@ -438,15 +466,71 @@ public class DrawingImageCreator
         }
     }
 
-    public void ChangeJoystickColor(string buttonName, Brush color) {
-        if (components[buttonName] is DrawingGroup joystickGroup) {
-            if (joystickGroup.Children[1] is DrawingGroup joystick) {
+    // Toggles the touch pad points and is responsible for calculating their accurate position
+    // point = 0 toggles the first touch point and point = 1 toggles the second
+    public void ToggleTouchPadPoint(string touchPointName, DualSenseAPI.Touch touchInfo)
+    {
+        DrawingGroup touchPoint = touchPointName == "touch point 1" ? touchPoint1 : touchPoint2;
+
+        if (!touchInfo.IsDown)
+        {
+            if (dualsenseImgGroup.Children[0] is DrawingGroup gd2) gd2.Children.Remove(touchPoint);
+        }
+        else if (touchInfo.IsDown)
+        {
+            
+		DrawingGroup touchPad = components["touch pad"];
+		Rect bounds = touchPad.Children[0].Bounds;
+
+		// Four corner points of the controller on the ui screen
+		Point topLeftCornerScreen = new Point(bounds.TopLeft.X, bounds.TopLeft.Y);
+		Point bottomLeftCornerScreen = new Point(bounds.BottomLeft.X, bounds.BottomLeft.Y);
+		Point topRightCornerScreen = new Point(bounds.TopRight.X, bounds.TopRight.Y);
+		Point bottomRightCornerScreen = new Point(bounds.BottomRight.X, bounds.BottomRight.Y);
+
+		// Four corner points of the physcial dualsense, controller is 1920x1080, 0 indexed
+		Point topLeftCornerController = new Point(0, 0);
+		Point bottomLeftCornerController = new Point(0, 1079);
+		Point topRightCornerController = new Point(1919, 0);
+		Point bottomRightCornerController = new Point(1919, 1079);
+
+		// Maps the physical controller coridinates to the touchpad on screen
+		double controllerX = touchInfo.X, controllerY = touchInfo.Y;
+		double scaleX = (bottomRightCornerScreen.X - bottomLeftCornerScreen.X) / (bottomRightCornerController.X - bottomLeftCornerController.X);
+		double scaleY = (bottomRightCornerScreen.Y - topRightCornerScreen.Y) / (bottomRightCornerController.Y - topRightCornerController.Y);
+
+            double new_x = (controllerX * scaleX) + bottomLeftCornerScreen.X;
+            double new_y = (controllerY * scaleY) + topLeftCornerScreen.Y;
+            if (touchPoint.Children[0] is GeometryDrawing gd)
+            {
+                if (gd.Geometry is EllipseGeometry ellipse)
+                {
+                    ellipse.Center = new Point(new_x, new_y);
+                }
+            }
+            if (!components.ContainsKey(touchPointName))
+            {
+                if (dualsenseImgGroup.Children[0] is DrawingGroup gd2)
+                {
+                    gd2.Children.Add(touchPoint);
+                }
+            }
+        }
+    }
+
+    public void ChangeJoystickColor(string buttonName, Brush color)
+    {
+        if (components[buttonName] is DrawingGroup joystickGroup)
+        {
+            if (joystickGroup.Children[1] is DrawingGroup joystick)
+            {
                 if (joystick.Children[0] is GeometryDrawing gd) gd.Brush = color;
             }
         }
     }
 
-    public void MoveJoystick(double x, double y, string joystick_name) {
+    public void MoveJoystick(double x, double y, string joystick_name)
+    {
         double x_center = 1493.18, y_center = 791.553;
         double radius = 78.002;
 
@@ -455,9 +539,11 @@ public class DrawingImageCreator
         double new_y = y_center - (radius * y);
 
         // Get the joystick DrawingGroup from components
-        if (components[joystick_name] is DrawingGroup joystick_group) {
+        if (components[joystick_name] is DrawingGroup joystick_group)
+        {
 
-            if (joystick_group.Children[1] is DrawingGroup joystick) {
+            if (joystick_group.Children[1] is DrawingGroup joystick)
+            {
 
                 if (joystick.Children[0] is GeometryDrawing gd)
                 {
