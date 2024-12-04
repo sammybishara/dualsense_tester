@@ -11,11 +11,6 @@
 
   <ItemGroup>
     <None Remove="dualsense_wireframe_pic.jpeg" />
-    <None Remove="images\dualsense_pic.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Remove="images\dualsense_pic.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,8 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="images\dualsense_pic.svg" />
-    <Resource Include="images\dualsense_pic.xaml" />
+    <Folder Include="images\" />
   </ItemGroup>
 
 </Project>

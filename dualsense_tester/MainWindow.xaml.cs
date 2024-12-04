@@ -2,6 +2,8 @@
 using System.Windows.Media;
 using HidSharp;
 using System.Windows.Threading;
+using System.Diagnostics;
+using System.Threading;
 
 namespace dualsense_tester
 {
@@ -10,8 +12,9 @@ namespace dualsense_tester
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DrawingImage img;
-        private DispatcherTimer _frameTimer;
+        private DispatcherTimer frameTimer;
+        private DualSenseTester DualSenseTester;
+        private CancellationTokenSource _cancellationTokenSource;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,38 +31,50 @@ namespace dualsense_tester
             {
                 if (device.GetFriendlyName() == "DualSense Wireless Controller")
                 {
-                    DualSenseTester ds_tester = new DualSenseTester(this);
+                    DualSenseTester = new DualSenseTester(this);
                 }
             }
         }
 
-        public void UpdateImage(DrawingImage newImg)
-        {
-            img = newImg;
-        }
-
         public void RenderFrame()
         {
-            dualsense_img.Source = img;
+            Dispatcher.Invoke(() =>
+            {
+                dualsense_img.Source = DualSenseTester.dualsenseImg;
+            });
         }
 
         public void StartRendering(int targetFPS) {
-            // Calculate interval based on target FPS
-            TimeSpan interval = TimeSpan.FromMilliseconds(1000 / targetFPS);
+            _cancellationTokenSource = new CancellationTokenSource();
+            var token = _cancellationTokenSource.Token;
 
-            // Set up the timer
-            _frameTimer = new DispatcherTimer
+            Task.Run(async () =>
             {
-                Interval = interval
-            };
+                int frameInterval = 1000 / targetFPS; // milliseconds per frame
+                Stopwatch stopwatch = new Stopwatch();
 
-            _frameTimer.Tick += (s, e) =>
-            {
-                RenderFrame(); // Call the rendering method
-            };
+                while (!token.IsCancellationRequested)
+                {
+                    stopwatch.Restart();
+                    RenderFrame(); // Perform rendering
 
-            _frameTimer.Start();
+                    // Wait for the next frame
+                    int elapsed = (int)stopwatch.ElapsedMilliseconds;
+                    int delay = frameInterval - elapsed;
+
+                    if (delay > 0)
+                    {
+                        await Task.Delay(delay, token);
+                    }
+                }
+            }, token);
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+            base.OnClosed(e);
+        }
     }
 }
